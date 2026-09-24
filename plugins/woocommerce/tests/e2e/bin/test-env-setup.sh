@@ -53,6 +53,11 @@ fi
 echo -e 'Update Blog Name \n'
 $WP_CLI_PREFIX wp option update blogname 'WooCommerce Core E2E Test Suite'
 
+# The tour blocks clicks outside the menu it points at, which breaks any test
+# that opens Analytics Overview and interacts with the rest of the page.
+echo -e 'Mark the Analytics Overview metrics tour as seen for the admin user \n'
+$WP_CLI_PREFIX wp user meta update admin woocommerce_admin_dashboard_performance_tour_shown 'yes'
+
 echo -e 'Preparing Test Files \n'
 $WP_CLI_PREFIX sudo cp /var/www/html/wp-content/plugins/woocommerce/tests/legacy/unit-tests/importer/sample.csv /var/www/sample.csv
 
